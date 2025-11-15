@@ -67,16 +67,24 @@ class LinkedList{
             this.headNode = null
             this.length = 0
         } else {
-            while (currentNode.next) {
-                if (currentNode.next.next === null) {
-                    currentNode.next = null
-                    this.length--
-                    break
-                } else {
-                    currentNode = currentNode.next
-                }
+            while (currentNode.next.next) {
+                currentNode = currentNode.next
             }
+            currentNode.next = null
+            this.length--;
         }
+    }
+
+    contains(value) {
+        let currentNode = this.headNode
+
+        while (currentNode) {
+            if (currentNode.value === value) {
+                return true
+            }
+            currentNode = currentNode.next
+        }
+        return false
     }
 };
 
@@ -93,6 +101,6 @@ testList.append("2")
 testList.prepend("1")
 testList.append("3")
 
-
+console.log(testList.contains("4"))
 
 console.log(testList)
