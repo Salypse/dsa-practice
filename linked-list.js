@@ -86,6 +86,21 @@ class LinkedList{
         }
         return false
     }
+
+    find(value) {
+        let currentNode = this.headNode
+        let currentIndex = 0;
+
+        while (currentNode) {
+            if (currentNode.value === value) {
+                return currentIndex
+            } else {
+                currentNode = currentNode.next
+                currentIndex++;
+            }
+        }
+        return null
+    }
 };
 
 class Node {
@@ -100,7 +115,5 @@ const testList = new LinkedList()
 testList.append("2")
 testList.prepend("1")
 testList.append("3")
-
-console.log(testList.contains("4"))
 
 console.log(testList)
