@@ -1,6 +1,7 @@
 class LinkedList{
     constructor() {
         this.head = null;
+        this.length = 0;
     };
 
     append(value) {
@@ -8,7 +9,7 @@ class LinkedList{
             this.head = new Node(value)
         } else {
             let currentNode = this.head;
-            while (true) {
+            while (currentNode.next) {
                 if (currentNode.next != null) {
                     currentNode = currentNode.next
                 } else {
@@ -18,17 +19,23 @@ class LinkedList{
             }
 
         }
+        this.length++;
     }
 
     prepend(value) {
         const newNode = new Node(value)
-        
+        this.length++;
+
         if (!this.head) {
-            this.head = newNode
+            this.head = newNode;
         } else {
             newNode.next = this.head
             this.head = newNode
         }
+    }
+
+    size() {
+        return this.length;
     }
 };
 
@@ -44,5 +51,6 @@ const testList = new LinkedList()
 testList.append("2")
 testList.prepend("1")
 testList.append("3")
+console.log(testList.size())
 
 console.log(testList)
