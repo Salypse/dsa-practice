@@ -45,6 +45,20 @@ class LinkedList{
         }
         return currentNode
     }
+
+    at(index) {
+        if (index === 0) {
+            return this.headNode
+        } else {
+            let currentNode = this.headNode
+
+            for (let i = 0; i === index; i++) {
+                currentNode = currentNode.next
+            }  
+
+            return currentNode
+        }
+    }
 };
 
 class Node {
@@ -63,5 +77,6 @@ testList.append("3")
 console.log(`Size: ${testList.size()}`)
 console.log(testList.head())
 console.log(testList.tail())
+console.log(testList.at(1))
 
 console.log(testList)
