@@ -11,7 +11,7 @@ class LinkedList{
             this.headNode = new Node(value)
         } else {
             let currentNode = this.headNode;
-            while (currentNode.next != null) {
+            while (currentNode.next) {
                 currentNode = currentNode.next
             }
             currentNode.next = new Node(value)
@@ -37,6 +37,14 @@ class LinkedList{
     head() {
         return this.headNode;
     }
+
+    tail() {
+        let currentNode = this.headNode
+        while (currentNode.next) {
+            currentNode = currentNode.next
+        }
+        return currentNode
+    }
 };
 
 class Node {
@@ -52,7 +60,8 @@ testList.append("2")
 testList.prepend("1")
 testList.append("3")
 
-console.log(testList.size())
+console.log(`Size: ${testList.size()}`)
 console.log(testList.head())
+console.log(testList.tail())
 
 console.log(testList)
