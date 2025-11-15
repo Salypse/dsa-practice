@@ -59,6 +59,25 @@ class LinkedList{
             return currentNode
         }
     }
+
+    pop() {
+        let currentNode = this.headNode
+
+        if (!currentNode.next) {
+            this.headNode = null
+            this.length = 0
+        } else {
+            while (currentNode.next) {
+                if (currentNode.next.next === null) {
+                    currentNode.next = null
+                    this.length--
+                    break
+                } else {
+                    currentNode = currentNode.next
+                }
+            }
+        }
+    }
 };
 
 class Node {
@@ -74,9 +93,6 @@ testList.append("2")
 testList.prepend("1")
 testList.append("3")
 
-console.log(`Size: ${testList.size()}`)
-console.log(testList.head())
-console.log(testList.tail())
-console.log(testList.at(1))
+
 
 console.log(testList)
