@@ -57,4 +57,17 @@ class HashMap{
         }
         return false
     }
+
+    remove(key) {
+        const index = this.hash(key)
+        let bucket = this.buckets[index]
+        
+        for (let i = 0; i < bucket.length; i++) {
+            if (bucket[i].key === key) {
+                bucket.splice(i, 1)
+                return true
+            }
+        }
+        return false
+    }
 }
