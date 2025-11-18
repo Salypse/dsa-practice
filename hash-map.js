@@ -26,13 +26,24 @@ class HashMap{
 
         //If key exist in bucket update value
         for (let pair of bucket) {
-            if (pair[0] === key) {
-                pair[1] = value
+            if (pair.key === key) {
+                pair.value = value
                 return
             }
         }
         
         //Push new pair to bucket if new key or empty bucket
-        bucket.push([key,value])
+        bucket.push({"key": key, "value": value})
+    }
+
+    get(key) {
+        const index = this.hash(key)
+
+        for (let pair of this.buckets[index]) {
+            if (pair.key === key) {
+                return pair.value
+            }
+        }
+        return null
     }
 }
