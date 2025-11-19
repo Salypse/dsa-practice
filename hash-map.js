@@ -86,4 +86,26 @@ class HashMap{
             }
         }
     }
+
+    keys() {
+        let keys = []
+
+        for (let bucket of this.buckets) {
+            if (bucket.length >= 1) {
+                keys.push(bucket.map((pair) => pair.key))
+            }
+        }
+        return keys.flat()
+    }
+
+    values() {
+        let values = []
+
+        for (let bucket of this.buckets) {
+            if (bucket.length >= 1) {
+                values.push(bucket.map((pair) => pair.value))
+            }
+        }
+        return values.flat()
+    }
 }
