@@ -77,4 +77,13 @@ class HashMap{
     length() {
         return this.keyLength;
     }
+
+    clear() {
+        for (let i = 0; i < this.buckets.length; i++) {
+            //If the current index has a value remove it
+            if (this.buckets[i]) {
+                this.buckets[i] = []
+            }
+        }
+    }
 }
