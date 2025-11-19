@@ -3,6 +3,7 @@ class HashMap{
         this.loadFactor = 0.75;
         this.capacity = 16;
         this.buckets = Array.from({length: this.capacity}, () => [])
+        this.keyLength = 0;
     }
 
     hash(key) {
@@ -34,6 +35,7 @@ class HashMap{
         
         //Push new pair to bucket if new key or empty bucket
         bucket.push({"key": key, "value": value})
+        this.keyLength++;
     }
 
     get(key) {
@@ -65,9 +67,14 @@ class HashMap{
         for (let i = 0; i < bucket.length; i++) {
             if (bucket[i].key === key) {
                 bucket.splice(i, 1)
+                this.keyLength--;
                 return true
             }
         }
         return false
+    }
+
+    length() {
+        return this.keyLength;
     }
 }
