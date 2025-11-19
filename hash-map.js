@@ -108,4 +108,15 @@ class HashMap{
         }
         return values.flat()
     }
+
+    entries() {
+        let entries = []
+        
+        for (let bucket of this.buckets) {
+            if (bucket.length >= 1) {
+                entries.push(bucket.map((pair) => pair))
+            }
+        }
+        return entries
+    }
 }
