@@ -1,4 +1,4 @@
-class HashMap{
+export class HashMap{
     constructor() {
         this.loadFactor = 0.75;
         this.capacity = 16;
@@ -11,10 +11,10 @@ class HashMap{
         const primeNumber = 31;
 
         for (let i = 0; i < key.length; i++) {
-            hashCode = (primeNumber * hashCode + key.charCodeAt(i)) % this.capacity;
+            hashCode = (primeNumber * hashCode + key.charCodeAt(i));
         }
 
-        return hashCode
+        return hashCode % this.capacity
     }
 
     set(key, value) {
@@ -36,6 +36,23 @@ class HashMap{
         //Push new pair to bucket if new key or empty bucket
         bucket.push({"key": key, "value": value})
         this.keyLength++;
+
+        if (this.keyLength > this.capacity * this.loadFactor) {
+            this.grow()
+        }
+    }
+
+    grow() {
+        const oldBuckets = this.buckets
+        this.capacity *= 2;
+        this.buckets = Array.from({length: this.capacity}, () => []);
+        this.keyLength = 0;
+
+        for (let bucket of oldBuckets) {
+            if (bucket.length >= 1) {
+                bucket.map((pair) => this.set(pair.key, pair.value))
+            }
+        }
     }
 
     get(key) {
@@ -79,12 +96,8 @@ class HashMap{
     }
 
     clear() {
-        for (let i = 0; i < this.buckets.length; i++) {
-            //If the current index has a value remove it
-            if (this.buckets[i]) {
-                this.buckets[i] = []
-            }
-        }
+        this.buckets = Array.from({length: this.capacity}, () => []); 
+        this.keyLength = 0;
     }
 
     keys() {
