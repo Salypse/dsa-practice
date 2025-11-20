@@ -89,4 +89,20 @@ export class Tree {
         }
         this.root = deleteRecursive(this.root, value)
     }
+
+    find(value) { 
+        if (!this.root) { 
+            return null 
+        } 
+        const findRecursive = (node) => { 
+            if (!node) return null
+            
+            if (value < node.data) { 
+                return findRecursive(node.left) 
+            } else if (value > node.data) { 
+                return findRecursive(node.right) 
+            } else return node 
+        }
+        return findRecursive(this.root)  
+    }
 }
