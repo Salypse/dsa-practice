@@ -105,4 +105,25 @@ export class Tree {
         }
         return findRecursive(this.root)  
     }
+
+    levelOrderForEach(callback) {
+        if (typeof callback !== "function") {
+            throw new Error("Callback must be of type function")
+        }
+
+        if (this.root === null) return null 
+        let nodeQueue = [this.root]
+
+        while (nodeQueue.length > 0) {
+            const node = nodeQueue.shift()
+            node.data = callback(node.data)
+            
+            if (node.left) {
+                nodeQueue.push(node.left)
+            }
+            if (node.right) {
+                nodeQueue.push(node.right)
+            }
+        }
+    }
 }
