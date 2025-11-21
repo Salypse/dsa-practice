@@ -111,12 +111,12 @@ export class Tree {
             throw new Error("Callback must be of type function")
         }
 
-        if (this.root === null) return null 
+        if (this.root === null) return
         let nodeQueue = [this.root]
 
         while (nodeQueue.length > 0) {
             const node = nodeQueue.shift()
-            node.data = callback(node.data)
+            callback(node.data)
             
             if (node.left) {
                 nodeQueue.push(node.left)
@@ -125,5 +125,50 @@ export class Tree {
                 nodeQueue.push(node.right)
             }
         }
+    }
+
+    inOrderForEach(callback) {
+        if (typeof callback !== "function") {
+            throw new Error("Callback must be of type function")
+        }
+
+        const inOrderRecurive = (node) => {
+            if (node) {
+                inOrderRecurive(node.left)
+                callback(node.data)
+                inOrderRecurive(node.right)
+            }
+        }
+        inOrderRecurive(this.root)
+    }
+
+    preOrderForEach(callback) {
+        if (typeof callback !== "function") {
+            throw new Error("Callback must be of type function")
+        }
+
+        const preOrderRecurive = (node) => {
+            if (node) {
+                callback(node.data)
+                preOrderRecurive(node.left)
+                preOrderRecurive(node.right)
+            }
+        }
+        preOrderRecurive(this.root)
+    }
+
+    postOrderForEach(callback) {
+        if (typeof callback !== "function") {
+            throw new Error("Callback must be of type function")
+        }
+
+        const postOrderRecurive = (node) => {
+            if (node) {
+                postOrderRecurive(node.left)
+                postOrderRecurive(node.right)
+                callback(node.data)
+            }
+        }
+        postOrderRecurive(this.root)
     }
 }
