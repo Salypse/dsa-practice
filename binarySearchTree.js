@@ -171,4 +171,40 @@ export class Tree {
         }
         postOrderRecurive(this.root)
     }
+
+    height(value) {
+        const targetNode = this.find(value)
+        if (!targetNode) return null
+
+        const findHeight = (node) => {
+            if (!node) {
+                return -1
+            }
+            const leftHeight = findHeight(node.left)
+            const rightHeight = findHeight(node.right)
+
+            return 1 + (Math.max(leftHeight, rightHeight))
+        } 
+
+        return findHeight(targetNode)
+    }
+
+    depth(value) {
+        let currentNode = this.root
+        let nodeDepth = 0;
+
+        while (currentNode !== null) {
+            if (value < currentNode.data) {
+                currentNode = currentNode.left
+                nodeDepth++
+            } 
+            else if (value > currentNode.data) {
+                currentNode = currentNode.right
+                nodeDepth++
+            } else {
+                return nodeDepth
+            }
+        }
+        return null
+    }
 }
